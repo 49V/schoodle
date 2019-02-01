@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8081;
+const PORT        = process.env.PORT || 8025;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
@@ -14,8 +14,11 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
-// Seperated Routes for each Resource
+// Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
+
+// The `dataHelpers` module provides an interface to the database of schoodle
+const dataHelpers = require("./lib/db")(knex);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -44,5 +47,6 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT);
+  console.log("Example app listening on port " + PORT);  
 });
+
