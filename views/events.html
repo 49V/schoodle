@@ -1,58 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Basic Bootstrap Template</title>
+    <title>Schoodle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/Users/erintoth/lighthouse/schoodle/public/styles/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
 
     <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
-  </head>
-<body>
-        <div class="container-fluid">
-                <div class="row">
-                        <!-- <div class="p-3 mb-2 bg-info text-white">Image and text -->
-                            <nav class="navbar">
-                              <h1>Schoodle!</h1>
-                            </nav>
-                        <!-- </iv> -->
-                </div>
-                <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <h2>Step 1 of 4</h2>
-                            <h2>What are you planning?</h2>
-                            <section class="main">
-                                <div class="form">
-                                        <form>
-                                                <div class="eventName">
-                                                  <label for="eventName">Name your event: </label>
-                                                  <input type="text" class="form-control" id="eventName"  placeholder="Enter the name of your event!">
-                                                </div>  
-                                                <div class="eventLocation">
-                                                  <label for="location">Event location: </label>
-                                                  <input type="text" class="form-control" id="eventLocation" placeholder="Where will your event take place?">
-                                                </div>
-                                                <div class="eventDescription">
-                                                  <label for="eventDescription">Event description: </label>
-                                                  <input type="text" class="form-control" id="eventDescription" placeholder="Describe your event for your guests">
-                                                </div>
-                                            <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/events2.html" class="btn"><h3>Continue -> </h3></a></div>
-                                        </form>
-                                </div>
-                                    
-                                <p></p>
+</head>
 
-                            </section>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar">
+                <h1>Schoodle!</h1>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="eventInfo">
+                    <h2>Step 1 of 4</h2>
+                    <h2>Who are you and what are you planning?</h2>
+                    <section class="main">
+                        <div class="form">
+                            <form>
+                                <div class="eventName">
+                                    <label for="eventName">Name your event: </label>
+                                    <input type="text" class="form-control" id="eventName" placeholder="Enter the name of your event!">
+                                </div>
+                                <div class="eventLocation">
+                                    <label for="location">Event location: </label>
+                                    <input type="text" class="form-control" id="eventLocation" placeholder="Where will your event take place?">
+                                </div>
+                                <div class="eventDescription">
+                                    <label for="eventDescription">Event description: </label>
+                                    <input type="text" class="form-control" id="eventDescription" placeholder="Describe your event for your guests">
+                                </div>
+                                <div class="organizerName">
+                                    <label for="organizerName">Enter your name: </label>
+                                    <input type="text" class="form-control" id="organizerName" placeholder="What's your name?">
+                                </div>
+                                <div class="organizerEmail">
+                                    <label for="organizerEmail">Enter your email: </label>
+                                    <input type="text" class="form-control" id="organizerEmail" placeholder="What is your e-mail address?">
+                                </div>
+                                <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/events2.html"
+                                        class="btn">
+                                        <h3>Continue -> </h3>
+                                    </a></div>
+                            </form>
                         </div>
-                    </div>
+
+                        <p></p>
+
+                    </section>
+                </div>
+
             </div>
+        </div>
+    </div>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

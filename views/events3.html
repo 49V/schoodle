@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Basic Bootstrap Template</title>
+    <title>Schoodle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/Users/erintoth/lighthouse/schoodle/public/styles/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script src="dist/clipboard.min.js"></script>
+    <script>
+        var btn = document.getElementById('btn');
+        var clipboard = new ClipboardJS(btn, {
+            container: document.getElementById('modal')
+        });
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+    </script>
     <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
-
     <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
-  </head>
+</head>
+
 <body>
-        <div class="container-fluid">
-                <div class="row">
-                        <!-- <div class="p-3 mb-2 bg-info text-white">Image and text -->
-                            <nav class="navbar">
-                              <h1>Schoodle!</h1>
-                            </nav>
-                        <!-- </iv> -->
-                </div>
-                <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <h2>Step 3 of 4</h2>
-                            <h2>Who are you?</h2>
-                            <section class="main">
-                                <div class="form">
-                                        <form>
-                                                <div class="name">
-                                                  <label for="inputName">Name</label>
-                                                  <input type="name" class="form-control" id="inputName" aria-describedby="emailHelp" placeholder="Enter your name!">
-                                                </div>  
-                                                <div class="email">
-                                                  <label for="email">E-mail address</label>
-                                                  <input type="email" class="form-control" id="inputEmail" placeholder="Enter your e-mail address here!">
-                                                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    
-                                                </div>
-                                            <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/events4.html" class="btn"><h3>Continue -> </h3></a></div>
-
-                                        </form>
-                                </div>
-                                    
-                                <p></p>
-
-                            </section>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar">
+                <h1>Schoodle!</h1>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2>Step 4 of 4</h2>
+                <h2>Let's get to the voting!</h2>
+                <section class="main">
+                    <div class="message">
+                        Congratulations! Your event page is now ready to be sent out to all of your attendees.
                     </div>
+
+                    <div class="eventLink">
+                        <!-- Target -->
+                        <input id="eventLink" value="http://www.schoodle.com/<%= eventLink %>">
+                        <!-- Trigger -->
+                        <button class="eventBtn" data-clipboard-target="#eventLink">
+                            <img src="/Users/erintoth/lighthouse/schoodle/public/images/Octicons-clippy.svg" width=14
+                                height=16 alt="Copy to clipboard">
+                        </button>
+                    </div>
+                    <div class="createButton">
+                        <a href="file:///Users/erintoth/lighthouse/schoodle/views/eventPage.html" class="btn">
+                            <h3>Continue -> </h3>
+                        </a></div>
+
+                </section>
             </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

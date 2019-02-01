@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Schoodle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/Users/erintoth/lighthouse/schoodle/public/styles/custom.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
+
+  <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
+  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="navbar">
+        <h1>Schoodle!</h1>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>
+          <%= eventTitle %>
+        </h2>
+        
+        <section class="main">
+          <div class="message">
+            <%= eventDescription %>
+          </div>
+          <div class="message">
+            📍
+            <%= eventLocation %>
+          </div>
+          <div class="message">
+                <small id="passwordHelpBlock" class="form-text text-muted"><a href="/delete">Delete</a></small>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">
+                  <%= eventOption1></th>
+                <th scope="col"><%= eventOption2></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Choose final option:</th>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="option1">
+                    <label class="form-check-label" for="option1"><%= option1.sum %>
+                    </label>
+                  </div>
+                </td>
+                <td><div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="option2">
+                    <label class="form-check-label" for="option2"> <%= option2.sum >
+                    </label>
+                  </div></td>
+              </tr>
+              <tr>
+                <th scope="row"><%= attendee1 %></th>
+                <td><%= attendee1.response1></td>
+                <td><%= attendee1.response2></td>
+              </tr>
+              <tr>
+                <th scope="row"><%= attendee2></th>
+                <td><%= attendee2.response1 ></td>
+                <td><%= attendee2.response2 ></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/events3.html"
+            class="btn">
+            <h3>Vote!</h3>
+        </a></div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
