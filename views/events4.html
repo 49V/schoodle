@@ -24,18 +24,38 @@
                 <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Step 4 of 4</h2>
-                            <h2>Let's get to the planning!</h2>
+                            <h2>Let's get to the voting!</h2>
                             <section class="main">
                                 <div class="message">
-                                    Congratulations! Your event page is now ready to be sent out to all your attendees.
-                                    <input type="text" class="form-control" placeholder="{insert url here}">
+                                    Congratulations! Your event page is now ready to be sent out to all of your attendees.
                                 </div>
-                                <div class="createButton"><button type="button" class="btn"><h3>Check out your event page! </h3></button></div>
+                                
+                                <div class="eventLink">
+                                    <!-- Target -->
+<input id="eventLink" value="https://github.com/zenorocha/clipboard.js.git">
+
+<!-- Trigger -->
+<button class="eventBtn" data-clipboard-target="#eventLink">
+    <img src="/Users/erintoth/lighthouse/schoodle/public/images/Octicons-clippy.svg" width=20 alt="Copy to clipboard">
+</button>
+                                </div>
+                                            <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/eventPage.html" class="btn"><h3>Continue -> </h3></a></div>
 
                             </section>
                         </div>
                     </div>
             </div>
+    <script src="dist/clipboard.min.js"></script>
+    <script>
+            var btn = document.getElementById('btn');
+            var clipboard = new ClipboardJS(btn);
+            clipboard.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+            </script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
