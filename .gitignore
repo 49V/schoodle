@@ -3,3 +3,7 @@ public/styles
 .env
 *.log
 *.sqlite3
+
+.DS_Store
+public/.DS_Store
+public/vendor/.DS_Store
