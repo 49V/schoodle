@@ -53,7 +53,9 @@ const eventDB = {
     title: req.body.title,         //event name
     location: req.body.location,   //event location
     descipt: req.body.description,
-    user: req.session.user_id     //organizers_id
+    user: req.session.user_id,     //organizers_id
+    question1: req.body.question1,
+    question2: req.body.question2
   }
 }
 
@@ -61,8 +63,9 @@ const eventDB = {
 const responseDB = {
   randomUrl: {
     name: req.body.name,            //response name
-    question1: req.body.question1,  //response1
-    question2: req.body.question2   //response2
+    response1: req.body.question1,  //response1
+    response2: req.body.question2,   //response2
+    respondent: req.session.user_id
   }
 }
 
@@ -71,7 +74,7 @@ app.get("/", (req, res) => {
   res.render("MainPage");
 });
 
-//create a new event with event name and description by an organizer, store a cookie
+//create a new event with event name and description by an organizer, store a cookie of the organizer
 app.post("/events", (req, res) => {
   const randomUrl = generateRandomString();
   eventDB[randomUrl] = {
@@ -79,28 +82,55 @@ app.post("/events", (req, res) => {
     title: req.body.title,         //event name
     location: req.body.location,   //event location
     descipt: req.body.description,  //event description
-    user: req.session.user_id     //organizers_id
+    user: req.session.user_id,     //organizers_id
+    question1: req.body.question1,
+    question2: req.body.question2
   }
-
   res.redirect("/events/" + randomUrl);
 });
 
 //access a specific created/shareable url, all users are able to access this page once provided.
 app.get("/events/:id", (req, res) => {
-  res.render("responsePageHere");
+  const eventInfo = {
+    title: eventDB[randomUrl].title,
+    question1: req.body.question1,
+    question2: req.body.question2,
+    respondents: responseDB[randomUrl].name, //this row will show if other responded
+    responses1: responseDB[randomUrl].response1, //this row will show if other responded
+    response2: responseDB[randomUrl].response2 //this row will show if other responded
+  }
+  res.render("responsePageHere", eventInfo);
 });
 
 //close the poll by the organizer
 app.post("/events/:id", (req, res) => {
-  //if the confirm button is clicked, all input will be closed
-  res.redirect("eventPageClose");
+  const eventFinal = {
+    title: eventDB[randomUrl].title,
+    location: eventDB[randomUrl].location,
+    description: eventDB[randomUrl].description,
+    question1: eventDB[randomUrl].question1,
+    question2: eventDB[randomUrl].question2,
+    response1: responseDB[randomUrl].respons21,
+    response2: responseDB[randomUrl].response2 
+  }
+  res.render("finalevent", eventFinal); 
 });
 
 //modify the poll page by the organizer
 app.patch("/events/:id", (req, res) => {
+  if (req.session.user_id == eventDB[randomUrl].user) {
+      eventDB[randomUrl] = {
+      title: req.body.title,         //event name
+      location: req.body.location,   //event location
+      descipt: req.body.description,  //event description
+      question1: req.body.question1,
+      question2: req.body.question2
+    }
+    res.redirect("/events/" + randomUrl);
+    }
+    res.redirect("responsePageHere"); //if not the organizer cookie, redirect to respondent's page
+  })
   
-  res.render("events");
-})
 
 //delete the poll page by the organizer
 app.delete("/events/:id", (req, res) => {
@@ -116,15 +146,24 @@ app.get("/events/:id/responses", (req, res) => {
 app.post("/events/:id/responses", (req, res) => {
   responseDB[randomUrl] = {
     name: req.body.name,
-    question1: req.body.question1,
-    question2: req.body.question2
+    response1: req.body.response1,
+    response2: req.body.response2,
+    respondent: req.session.user_id 
   }
-  res.redirect("responseMainHere");
+  res.redirect("responsePageHere");
 });
 
 //modify information to the response specific to an attendee
 app.patch("/events/:id/responses/:id", (req, res) => {
-  res.redirect("responsePageHere");
+  const respondent = req.session.user_id;
+  if(responseDB[randomUrl].respondent == respondent) {
+    const responseInfo = {
+      name: req.body.name,
+      response1: req.body.response1,
+      response2: req.body.respons2
+    }
+    res.render("responsePageHere", responseInfo);
+  }
 });
 
 //generate random strings(11 digits) for URLs
