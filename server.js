@@ -50,13 +50,9 @@ app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
 });
 
-const testResponseID = "1";
-
-const test = dataHelpers.deleteResponse(testResponseID);
-test.then((result) => {
-  if(result) {
-    console.log("true");
-  } else {
-    console.log("false");
-  }
-});
+const testUpdateResponse = {
+  attendee_name: 'Moshe Lawlor',
+  attendee_email: 'moshelawlor@gmail.com',
+  id: '3',
+  dates: "DATES LUL"
+};
