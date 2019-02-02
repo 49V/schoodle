@@ -1,24 +1,24 @@
 "use strict";
 
-// const config      = require('dotenv').config(); 
+// const config      = require('dotenv').config();        //uncomment
 
 const PORT        = process.env.PORT || 8080;
 
-// const ENV         = process.env.ENV || "development"; 
+// const ENV         = process.env.ENV || "development";  //uncomment
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
 
-// const knexConfig  = require("./knexfile");
-// const knex        = require("knex")(knexConfig[ENV]); 
+// const knexConfig  = require("./knexfile");             //uncomment 
+// const knex        = require("knex")(knexConfig[ENV]);  //uncomment
 const morgan      = require('morgan');
-// const knexLogger  = require('knex-logger');
-// const pg          = require('pg');
+// const knexLogger  = require('knex-logger');            //uncomment
+// const pg          = require('pg');                     //uncomment
 
 
 // Seperated Routes for each Resource
-// const usersRoutes   = require("./routes/users");
+// const usersRoutes   = require("./routes/users");       //uncomment
 const cookieSession = require("cookie-session");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -26,7 +26,7 @@ const cookieSession = require("cookie-session");
 app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
-// app.use(knexLogger(knex)); 
+// app.use(knexLogger(knex));                             //uncomment
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,7 +39,7 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-// app.use("/events", usersRoutes(knex));  //need to confirm the api line
+// app.use("/events", usersRoutes(knex));                 //uncomment
 
 //use cookies
 app.use(cookieSession({
@@ -50,38 +50,42 @@ app.use(cookieSession({
 
 
 // const pool = new Pool(config);
-
-// pool.connect((err, db, done) => { //connecting to the database
+// pool.connect((err, db, done) => {                   //connecting to the database
 //   if(err) {
 //   return console.log(err);
 // } else {
   //insert data into the database here? - replacing below
 
 
-    //tentative event database
+    //eventDB object structure
     const eventDB = {
     //   randomUrl: {
     //     pk: randomUrl,
-    //     title: req.body.title,         //event name
-    //     location: req.body.location,   //event location
+    //     title: req.body.title,              //event name
+    //     location: req.body.location,        //event location
     //     descipt: req.body.description,
     //     orgaznier: req.session.user_id,     //organizers_id
     //     question1: req.body.question1,
     //     question2: req.body.question2
     //   }
     }
+    
+    //options object structure to store two questions
     const options = {
-
+    //  randomUrl: {
+    //    quetion1: text,
+    //    question2: text
+    //  }
     }
 
-    // //tentative responseDB
+    // responses object structure 
     const responseDB = {
-    //   randomUrl: {
-    //     name: req.body.name,            //response name
-    //     response1: req.body.question1,  //response1
-    //     response2: req.body.question2,   //response2
-    //     respondent: req.session.user_id
-    //   }
+    //  randomUrl: {
+    //    name: req.body.name,                //response name
+    //    response1: req.body.question1,      //response1
+    //    response2: req.body.question2,      //response2
+    //    respondent: req.session.user_id
+    //  }
     }
 
 
@@ -102,11 +106,11 @@ app.use(cookieSession({
     //console.log(req.session.user_id);
     eventDB[randomUrl] = {
       pk: randomUrl,
-      title: req.body.title,         //event name
+      title: req.body.title,                //event name
       email: req.body.email,
-      location: req.body.location,   //event location
-      descipt: req.body.description,  //event description
-      organizer_id: req.session.user_id,     //organizers_id
+      location: req.body.location,          //event location
+      descipt: req.body.description,        //event description
+      organizer_id: req.session.user_id,    //organizers_id
     }
     res.redirect("/events/" + randomUrl + "/edit");
   });
@@ -115,76 +119,74 @@ app.use(cookieSession({
   app.get("/events/:id/edit", (req, res) => {
     const id = req.params.id;
     //console.log(eventDB[id]);
-    const tempVars = {
-      randomUrl: id,
-      title: eventDB[id].title,
-      location: eventDB[id].location,
-      descript: eventDB[id].description
-    }
-     res.render("show", tempVars);
+      const tempVars = {
+        randomUrl: id,
+        title: eventDB[id].title,
+        location: eventDB[id].location,
+        descript: eventDB[id].description
+      }
+      res.render("show", tempVars);
   });
 
-  //close/add the poll by the organizer
+  //add the poll by the organizer/modify the page
   app.post("/events/:id/edit", (req, res) => {
-    //req.session.user_id = 1; //this will be updated later with the cookie function
-    const user = req.params.id;
-    options[user] = {
+    req.session.user_id = 1; //this will be updated later with the cookie function
+    const url = req.params.id;
+    //verify user identity
+    if (eventDB[url].organizer_id != 1) {
+      res.send("you'r not allowed!");
+    }
+    options[url] = {
       time1: req.body.time,
       time2: req.body.time2
     }
-    console.log(options);
     res.render("show_user"); 
   });
 
-
-  //modify the poll page by the organizer
-  app.patch("/events/:id", (req, res) => {
-    if (req.session.user_id == eventDB[randomUrl].user) {
-        eventDB[randomUrl] = {
-        title: req.body.title,         //event name
-        location: req.body.location,   //event location
-        descipt: req.body.description,  //event description
-        question1: req.body.question1,
-        question2: req.body.question2
-      }
-      res.redirect("/events/" + randomUrl);
-      }
-      res.redirect("responsePageHere"); //if not the organizer cookie, redirect to respondent's page
-    })
-    
-
-  //delete the poll page by the organizer
-  app.delete("/events/:id", (req, res) => {
-    res.send("this page has been deleted by the orgaznier");
-  });
+  //organizer can delete the page
+  app.post("/events/:id", (req, res) => {
+    //add verify user identity
+    delete eventDB[req.params.id];
+    res.redirect("/");
+  })
 
   //access the response page by the attendees to view all responses/checking on final decision
   app.get("/events/:id/responses", (req, res) => {
-    res.render("responsePageHere");
+    const url = req.params.id;
+    const tempVars = {
+      url: url,
+      title: eventDB[url].title,
+      location: eventDB[url].location,
+      time1: options[url].time,
+      time2: options[url].time2
+    }
+    res.render("responses", tempVars);
   });
 
   //post information to the response page by the attendees
-  app.post("/events/:id/responses", (req, res) => {
-    responseDB[randomUrl] = {
-      name: req.body.name,
-      response1: req.body.response1,
-      response2: req.body.response2,
-      respondent: req.session.user_id 
+  app.post("/responses/:id/edit", (req, res) => {
+    const url = req.params.id;
+    const tempVars = {
+      url: url,
+      title: eventDB[url].title,
+      location: eventDB[url].location,
+      time1: options[url].time,
+      time2: options[url].time2,
     }
-    res.redirect("responsePageHere");
+
+    responseDB[url] = {           //need to replace url with user's cookie so user can edit their own response
+      name: req.body.name,
+      response1: req.body.response,
+      response2: req.body.response2,
+      event_id: url
+    }
+    
+    res.render("results", tempVars);
   });
 
   //modify information to the response specific to an attendee
-  app.patch("/events/:id/responses/:id", (req, res) => {
-    const respondent = req.session.user_id;
-    if(responseDB[randomUrl].respondent == respondent) {
-      const responseInfo = {
-        name: req.body.name,
-        response1: req.body.response1,
-        response2: req.body.respons2
-      }
-      res.render("responsePageHere", responseInfo);
-    }
+  app.post("/responses/:id/delete", (req, res) => {
+    delete responseDB[TBD];   //TBD should be user's cookie/identifier
   });
 
   //generate random strings(11 digits) for URLs
