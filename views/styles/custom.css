@@ -1,0 +1,98 @@
+body {
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.navbar {
+  background-color: #000639;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navbar h1 {
+  font-size: 5em;
+  color: #B7ECEC;
+  text-align: right;
+  padding-right: 25px;
+}
+
+.jumbotron {
+  background-color: #F9FAFB;
+  margin-top: 5em;
+}
+
+.container-fluid {
+  background-color: #F4F6F8;
+}
+
+body {
+  background-color: #F9FAFB;
+}
+
+div.createButton {
+  text-align: center;
+}
+
+div.createButton h3 {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #B3BCF5;
+  color: #3E4155;
+  margin-top: 3em;
+}
+
+.btn:hover {
+  color: #202E78;
+}
+
+.col-md-8 {
+  margin-top: 2em;
+  background-color: #000639;
+  padding-bottom: 2em;
+}
+
+.col-md-8 h2 {
+  color: #B7ECEC;
+  text-align: center;
+}
+
+section.main {
+  background-color: #F4F5Fa;
+  margin-top: 1em;
+  /* padding-top: 2em; */
+  /* padding-bottom: 2em; */
+  padding: 2em;
+}
+
+.form {
+  margin: 1em 3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* input#eventLink {
+  margin-left: 2em;
+} */
+.table {
+    text-align: center;
+}
+
+.eventLink {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.eventTable {
+  width: 100%;
+}
+
+.eventFinalPicker {
+  width: 100%;
+}

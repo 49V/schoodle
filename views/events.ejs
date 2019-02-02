@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/Users/erintoth/lighthouse/schoodle/public/styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
 
@@ -29,26 +29,26 @@
                     <h2>Who are you and what are you planning?</h2>
                     <section class="main">
                         <div class="form">
-                            <form method="POST" action="/create" >
+                            <form  action="/eventInfo" method="POST">
                                 <div class="eventName">
                                     <label for="eventName">Name your event: </label>
-                                    <input type="text" class="form-control" id="eventName" placeholder="Enter the name of your event!">
+                                    <input type="text" class="form-control" name="eventName" placeholder="Enter the name of your event!">
                                 </div>
                                 <div class="eventLocation">
                                     <label for="location">Event location: </label>
-                                    <input type="text" class="form-control" id="eventLocation" placeholder="Where will your event take place?">
+                                    <input type="text" class="form-control" name="eventLocation" placeholder="Where will your event take place?">
                                 </div>
                                 <div class="eventDescription">
                                     <label for="eventDescription">Event description: </label>
-                                    <input type="text" class="form-control" id="eventDescription" placeholder="Describe your event for your guests">
+                                    <input type="text" class="form-control" name="eventDescription" placeholder="Describe your event for your guests">
                                 </div>
                                 <div class="organizerName">
                                     <label for="organizerName">Enter your name: </label>
-                                    <input type="text" class="form-control" id="organizerName" placeholder="What's your name?">
+                                    <input type="text" class="form-control" name="organizerName" placeholder="What's your name?">
                                 </div>
                                 <div class="organizerEmail">
                                     <label for="organizerEmail">Enter your email: </label>
-                                    <input type="text" class="form-control" id="organizerEmail" placeholder="What is your e-mail address?">
+                                    <input type="text" class="form-control" name="organizerEmail" placeholder="What is your e-mail address?">
                                 </div>
                                 <div class="createButton"><button type="submit" class="btn"><h3>Continue -> </h3></button>
                                         

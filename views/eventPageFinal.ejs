@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="/Users/erintoth/lighthouse/schoodle/public/styles/custom.css">
+  <link rel="stylesheet" type="text/css" href="styles/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
 
@@ -44,35 +44,43 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col">
-                  <%= eventOption1></th>
-                <th scope="col"><%= eventOption2></th>
+                  <%= optionOne %></th>
+                <th scope="col"><%= optionTwo %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Final choice:</th>
+                <th scope="row">Choose final option:</th>
                 <td>
-                  <%= option1.sum %>
-                </td>
-                <td>
-                 <%= option2.sum >
-                  </td>
-              </tr>
-              <tr>
-                <th scope="row"><%= attendee1 %></th>
-                <td><%= attendee1.response1></td>
-                <td><%= attendee1.response2></td>
-              </tr>
-              <tr>
-                <th scope="row"><%= attendee2></th>
-                <td><%= attendee2.response1 ></td>
-                <td><%= attendee2.response2 ></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="message">
-              The poll is closed! The chosen date for this event is <%= optionx >.  
-          </div>
+                    <form action="/vote" method="POST">
+                        <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="option1" name="optionOne">
+                                <label class="form-check-label" for="option1"><%= optionOnesum %>
+                                </label>
+                              </div>
+                            </td>
+                            <td><div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="option2" name="optionTwo">
+                                <label class="form-check-label" for="option2"> <%= optionTwosum %>
+                                </label>
+                              </div></td>
+                          </tr>
+                          <tr>
+                            <th scope="row"><%= attendeeOne %></th>
+                            <td><%= attendeeOneresponseOne %></td>
+                            <td><%= attendeeOneresponseTwo %></td>
+                          </tr>
+                          <tr>
+                            <th scope="row"><%= attendeeTwo %></th>
+                            <td><%= attendeeTworesponseOne %></td>
+                            <td><%= attendeeTworesponseOne %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="createButton"><button type="submit" class="btn"><h3>Vote!</h3></button>
+                        </div>
+                    </form>
+                  
         </section>
       </div>
     </div>

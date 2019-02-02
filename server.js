@@ -30,13 +30,14 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-}));
+// app.use("/styles", sass({
+//   src: __dirname + "/styles",
+//   dest: __dirname + "/public/styles",
+//   debug: true,
+//   outputStyle: 'expanded'
+// }));
 app.use(express.static("public"));
+app.use(express.static("views"));
 
 // Mount all resource routes
 // app.use("/events", usersRoutes(knex));                 //uncomment
@@ -91,13 +92,56 @@ app.use(cookieSession({
 
   // Home page
   app.get("/", (req, res) => {
-    res.render("event");
+    res.render("index.ejs");
   });
   
-  //access the create event page
+  //access the create event page 1
   app.get("/events", (req, res) => {
-    res.render("new");
+    res.render("events.ejs");
   });
+
+//  Receive form info for event creation and render events2.ejs
+  app.post("/eventInfo", (req, res) => {
+      const eventName = req.body.eventName;
+      const eventLocation = req.body.eventLocation;
+      const eventDescription = req.body.eventDescription;
+      const organizerName = req.body.organizerName;
+      const organizerEmail = req.body.organizerEmail;
+    res.render("events2.ejs");
+  });
+
+
+  //   access the create event page 2, templateVars needs to be adjusted for correct variable
+  app.post("/eventOptions", (req, res) => {
+      const optionOne = req.body.optionOne;
+      const optionTwo = req.body.optionTwo;
+      const templateVars = {
+          eventLink: req.body.optionTwo
+      }; 
+    res.render("events3.ejs", templateVars);
+  });
+
+  app.get("/eventPageFinal", (req, res) => {
+    const templateVars = {
+        eventTitle: "Your event title!",
+        eventDescription: "And a little description",
+        eventLocation: "Vancouver",
+        optionOne: "Monday",
+        optionTwo: "Tuesday",
+        optionOnesum: "3",
+        optionTwosum: "5",
+        attendeeOne: "Jim",
+        attendeeOneresponseOne: "yes",
+        attendeeOneresponseTwo: "no",
+        attendeeTwo: "Karen",
+        attendeeTworesponseOne: "yes",
+        attendeeTworesponseTwo: "yes"
+    };
+    console.log(req.body.optionOne);
+    console.log(req.body.optionTwo);
+    res.render("eventPageFinal.ejs", templateVars);
+  });
+
 
   //create a new event with event name and description by an organizer, store a cookie of the organizer
   app.post("/events", (req, res) => {
