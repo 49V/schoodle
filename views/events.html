@@ -29,7 +29,7 @@
                     <h2>Who are you and what are you planning?</h2>
                     <section class="main">
                         <div class="form">
-                            <form>
+                            <form method="POST" action="/create" >
                                 <div class="eventName">
                                     <label for="eventName">Name your event: </label>
                                     <input type="text" class="form-control" id="eventName" placeholder="Enter the name of your event!">
@@ -50,10 +50,9 @@
                                     <label for="organizerEmail">Enter your email: </label>
                                     <input type="text" class="form-control" id="organizerEmail" placeholder="What is your e-mail address?">
                                 </div>
-                                <div class="createButton"><a href="file:///Users/erintoth/lighthouse/schoodle/views/events2.html"
-                                        class="btn">
-                                        <h3>Continue -> </h3>
-                                    </a></div>
+                                <div class="createButton"><button type="submit" class="btn"><h3>Continue -> </h3></button>
+                                        
+                                    </div>
                             </form>
                         </div>
 
