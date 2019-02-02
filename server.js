@@ -49,3 +49,14 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
 });
+
+const testResponseID = "1";
+
+const test = dataHelpers.deleteResponse(testResponseID);
+test.then((result) => {
+  if(result) {
+    console.log("true");
+  } else {
+    console.log("false");
+  }
+});
