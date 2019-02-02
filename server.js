@@ -49,10 +49,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
 });
-
-const testUpdateResponse = {
-  attendee_name: 'Moshe Lawlor',
-  attendee_email: 'moshelawlor@gmail.com',
-  id: '3',
-  dates: "DATES LUL"
-};
