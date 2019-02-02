@@ -102,11 +102,22 @@ app.use(cookieSession({
 
 //  Receive form info for event creation and render events2.ejs
   app.post("/eventInfo", (req, res) => {
-      const eventName = req.body.eventName;
-      const eventLocation = req.body.eventLocation;
-      const eventDescription = req.body.eventDescription;
-      const organizerName = req.body.organizerName;
-      const organizerEmail = req.body.organizerEmail;
+    const randomUrl = generateRandomString();
+    const eventName = req.body.eventName;
+    const eventLocation = req.body.eventLocation;
+    const eventDescription = req.body.eventDescription;
+    const organizerName = req.body.organizerName;
+    const organizerEmail = req.body.organizerEmail;
+    req.session.user_id = 1;   //should be assigned random nums
+    //console.log(req.session.user_id);
+    // eventDB[randomUrl] = {
+    //   pk: randomUrl,
+    //   title: req.body.title,                //event name
+    //   email: req.body.email,
+    //   location: req.body.location,          //event location
+    //   descipt: req.body.description,        //event description
+    //   organizer_id: req.session.user_id,    //organizers_id
+    // }
     res.render("events2.ejs");
   });
 
@@ -116,12 +127,15 @@ app.use(cookieSession({
       const optionOne = req.body.optionOne;
       const optionTwo = req.body.optionTwo;
       const templateVars = {
-          eventLink: req.body.optionTwo
+          eventLink: req.body.optionTwo //I just randomly entered the req.body.optionTwo in order to test my form output and have something to render. 
       }; 
     res.render("events3.ejs", templateVars);
   });
 
+//   This will be temporary and instead get rolled in to the following /events/:id with parameters for which cookie the person has. 
   app.get("/eventPageFinal", (req, res) => {
+    // const optionOne: req.body.optionOne;
+    // const optionTwo: req.body.optionTwo;
     const templateVars = {
         eventTitle: "Your event title!",
         eventDescription: "And a little description",
@@ -136,31 +150,53 @@ app.use(cookieSession({
         attendeeTwo: "Karen",
         attendeeTworesponseOne: "yes",
         attendeeTworesponseTwo: "yes"
+        // attendeeSum: "2";
     };
-    console.log(req.body.optionOne);
+
+    res.render("eventPageFinal.ejs", templateVars);
+  });
+
+  app.post("/vote", (req, res) => {
+    console.log("Check");
+    console.log(typeof req.body.optionOne);
+    console.log("Check again");
     console.log(req.body.optionTwo);
+    const templateVars = {
+        eventTitle: "Your event title!",
+        eventDescription: "And a little description",
+        eventLocation: "Vancouver",
+        optionOne: "Monday",
+        optionTwo: "Tuesday",
+        optionOnesum: "3",
+        optionTwosum: "5",
+        attendeeOne: "Jim",
+        attendeeOneresponseOne: "yes",
+        attendeeOneresponseTwo: "no",
+        attendeeTwo: "Karen",
+        attendeeTworesponseOne: "yes",
+        attendeeTworesponseTwo: "yes"
+        // attendeeSum: "2";
+    };
     res.render("eventPageFinal.ejs", templateVars);
   });
 
 
-  //create a new event with event name and description by an organizer, store a cookie of the organizer
-  app.post("/events", (req, res) => {
-    const randomUrl = generateRandomString();
-    req.session.user_id = 1;   //should be assigned random nums
-    //console.log(req.session.user_id);
-    eventDB[randomUrl] = {
-      pk: randomUrl,
-      title: req.body.title,                //event name
-      email: req.body.email,
-      location: req.body.location,          //event location
-      descipt: req.body.description,        //event description
-      organizer_id: req.session.user_id,    //organizers_id
-    }
-    res.redirect("/events/" + randomUrl + "/edit");
-  });
-
   //access a specific created/shareable url, all users are able to access this page once provided.
-  app.get("/events/:id/edit", (req, res) => {
+  app.get("/events/:id/", (req, res) => {
+    //   There will be something like:
+        // if (req.params.id = event_id) {
+        // if (req.session.cookie = organizerCookie) {
+    //     req.render("eventPageFinal.ejs", tempVars);
+    // } else if (req.session.cookie = attendeeCookie) {
+    //     req.render("eventPageAttendee.ejs", tempVars);
+    // } else if (!req.session.cookie) {
+    //     req.render("eventPageAttendee.ejs"); 
+
+        // } else {
+            // req.render("deleted.ejs"); 
+        // }
+ 
+    // }
     const id = req.params.id;
     //console.log(eventDB[id]);
       const tempVars = {
@@ -169,43 +205,45 @@ app.use(cookieSession({
         location: eventDB[id].location,
         descript: eventDB[id].description
       }
-      res.render("show", tempVars);
   });
 
-  //add the poll by the organizer/modify the page
-  app.post("/events/:id/edit", (req, res) => {
-    req.session.user_id = 1; //this will be updated later with the cookie function
-    const url = req.params.id;
-    //verify user identity
-    if (eventDB[url].organizer_id != 1) {
-      res.send("you'r not allowed!");
-    }
-    options[url] = {
-      time1: req.body.time,
-      time2: req.body.time2
-    }
-    res.render("show_user"); 
-  });
+    //organizer can delete the page
+    app.post("/events/:id/delete", (req, res) => {
+        //add verify user identity
+        delete eventDB[req.params.id];
+        res.redirect("/");
+      })
 
-  //organizer can delete the page
-  app.post("/events/:id", (req, res) => {
-    //add verify user identity
-    delete eventDB[req.params.id];
-    res.redirect("/");
-  })
+//   //add the poll by the organizer/modify the page
+//   app.post("/events/:id/edit", (req, res) => {
+//     req.session.user_id = 1; //this will be updated later with the cookie function
+//     const url = req.params.id;
+//     //verify user identity
+//     if (eventDB[url].organizer_id != 1) {
+//       res.send("you'r not allowed!");
+//     }
+//     options[url] = {
+//       time1: req.body.time,
+//       time2: req.body.time2
+//     }
+//     res.render("show_user"); 
+//   });
+
+
 
   //access the response page by the attendees to view all responses/checking on final decision
-  app.get("/events/:id/responses", (req, res) => {
-    const url = req.params.id;
-    const tempVars = {
-      url: url,
-      title: eventDB[url].title,
-      location: eventDB[url].location,
-      time1: options[url].time,
-      time2: options[url].time2
-    }
-    res.render("responses", tempVars);
-  });
+//   I think this is now handled by an earlier conditional app.get("/events/:id")
+//   app.get("/events/:id/responses", (req, res) => {
+//     const url = req.params.id;
+//     const tempVars = {
+//       url: url,
+//       title: eventDB[url].title,
+//       location: eventDB[url].location,
+//       time1: options[url].time,
+//       time2: options[url].time2
+//     }
+//     res.render("responses", tempVars);
+//   });
 
   //post information to the response page by the attendees
   app.post("/responses/:id/edit", (req, res) => {
@@ -225,7 +263,7 @@ app.use(cookieSession({
       event_id: url
     }
     
-    res.render("results", tempVars);
+    res.render("eventPageAttendee.ejs", tempVars);
   });
 
   //modify information to the response specific to an attendee
