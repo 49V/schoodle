@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8025;
+const PORT        = process.env.PORT || 8000;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
@@ -49,4 +49,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
 });
-
