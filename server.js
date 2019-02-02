@@ -49,3 +49,25 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
 });
+
+const test_event = {
+  description: "I like the way you work it",
+  name: "Cyborg Beans",
+  location: "Prince George"
+};
+
+const test_organizer = {
+  email: "beans@cuddles.net",
+  name: "Ho do dao"
+};
+
+dataHelpers.createOrganizerThenEvent(test_event, test_organizer)
+.then((result) => {
+    if(result) {
+      console.log("true");
+      console.log(result);
+    } else {
+      console.log("false");
+      console.log(result);
+    }
+});
