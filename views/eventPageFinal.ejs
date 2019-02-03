@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="styles/custom.css">
+  <link rel="stylesheet" type="text/css" href="../styles/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
 
@@ -19,7 +19,7 @@
   <div class="container-fluid">
     <div class="row">
       <nav class="navbar">
-        <h1>Schoodle!</h1>
+        <h1>SchoodleDOO!</h1>
       </nav>
     </div>
     <div class="row">
@@ -70,7 +70,7 @@
                      <% attendees.forEach((attendee) => { %>
                         <tr>
                             <th scope="row"><%= attendee.attendee_name %></th>
-                            <td><% if (attendee.responses_dates) { %>
+                            <td><% if (attendee.responses_dates) { %>   
                                 <% if (attendee.responses_dates[0] === 1) { %>
                                     <h2 class="posResponse">✔</h2>
                                     <% } else if (attendee.responses_dates &&attendee.responses_dates[0] === 0) { %>

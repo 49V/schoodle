@@ -125,18 +125,11 @@ app.post("/eventOptions", (req, res) => {
 
 //   This will be temporary and instead get rolled in to the following /events/:id with parameters for which cookie the person has. 
 //   final results
-app.get("/eventPageFinal", (req, res) => {
+app.get("/events/:id", (req, res) => {
 
-  // If no cookie
-  // res.render('eventPageAttendees.ejs')
-  // Else if cookie === eventID
-  // res.render(eventPageFinal.ejs)
-  // Else if cookie !== eventID
-  // res.render(eventPageAttendees.ejs)
   const cookie = req.cookies.event_id;
-console.log(cookie);
-  if (cookie) {
- 
+
+  if (cookie === req.params.id) {
     dataHelpers.getEventPageData(cookie)
         .then((rows) => {
             const templateVars = { 
@@ -145,95 +138,32 @@ console.log(cookie);
                 eventLocation: rows[0].location,
                 optionOne: rows[0].options_dates[0],
                 optionTwo: rows[0].options_dates[1],
-                attendees: rows, //rows[0].attendee_name, rows[0].responses_dates[0],[1]  
+                attendees: rows, 
               }
             return res.render('eventPageFinal.ejs', templateVars);
-            console.log(rows);
         })
 
     
   } else {
-    // const templateVars = {
 
-    // };
-    res.render('eventPageAttendees.ejs', templateVars);
+    dataHelpers.getEventPageData(req.params.id)
+    .then((rows) => {
+        const templateVars = { 
+            eventTitle: rows[0].name,
+            eventDescription: rows[0].description,
+            eventLocation: rows[0].location,
+            optionOne: rows[0].options_dates[0],
+            optionTwo: rows[0].options_dates[1],
+            attendees: rows,
+            eventLink: req.params.id  
+          }
+        return res.render('eventPageAttendee.ejs', templateVars);
+        console.log(rows);
+    })
+
   }
 
-//   const templateVars = { 
-//     eventTitle: eventDB[1].eventTitle,
-//     eventDescription: eventDB[1].eventDescription,
-//     eventLocation: eventDB[1].eventLocation,
-//     optionOne: options[1].optionOne,
-//     optionTwo: options[1].optionTwo,
-//     attendeesName: "Jim",  
-//     attendeeOneresponseOne: "yes",
-//     attendeeOneresponseTwo: "no",
-//     attendeeTwo: "Karen",
-//     attendeeTworesponseOne: "yes",
-//     attendeeTworesponseTwo: "yes",
-//     optionOnesum: "3",
-//     optionTwosum: "5"
-//     // attendeeSum: "2";
-//   };
-//   console.log(templateVars);
 });
-
-// 
-
-
-// access a specific created/shareable url based on cookies info
-app.get("/events/:id/", (req, res) => {
-// Identify whether the user is the organizer/ or the attendees based on cookies
-// if (req.params.id = event_id) {
-//    if (req.session.cookie = organizerCookie) {
-//     adding instance of what they can see as an organizer
-//    } else if (req.session.cookie = attendeeCookie) {
-//     adding instance of wha attendee can see as an attendee
-//    } 
-// } else {
-    // req.render("deleted.ejs"); 
-// }
-  
-  const tempVars = {
-    randomUrl: eventDB[1].randomUrl,
-    eventTitle: eventDB[1].eventTitle,
-    eventLocation: eventDB[1].eventLocation,
-    eventDescription: eventDB[1].eventDescription,
-    optionOne: options[1].optionOne,
-    optionTwo: options[1].optionTwo,
-    attendeeSum: 5, //tentative number,
-    optionOnesum: 2, //tent num
-    optionTwosum: 4,
-    attendeeOne: "Jim",
-    attendeeOneresponseOne: "yes",
-    attendeeOneresponseTwo: "no",
-    attendeeTwo: "Karen",
-    attendeeTworesponseOne: "yes",
-    attendeeTworesponseTwo: "yes"
-  }
-  console.log(tempVars);
-  res.render('eventPageAttendee', tempVars) 
-});
-
-app.post("/events/:id", (req, res) => { //changed from vote as it's associated with the link organizer received
-  const attendeesName = req.body.attendeesName;  
-  const templateVars = {
-    eventTitle: eventDB[1].eventTitle,
-    eventDescription: eventDB[1].eventDescription,
-    eventLocation: eventDB[1].eventLocation,
-    randomUrl: eventDB[1].randomUrl,
-    optionOne: options[1].optionOne,
-    optionTwo: options[1].optionTwo,
-    optionOnesum: "3",  
-    optionTwosum: "5",
-    attendeesName: attendeesName,//"Jim",
-    //attendeeOneresponseOne: attendeesDB[1].attendeeResponseOne,//"yes",
-    //attendeeOneresponseTwo: attendeesDB[1].attendeeResponseTwo //"no",
-    // attendeeSum: "2";
-    };
-    console.log(templateVars);
-  res.render("eventPageFinal.ejs", templateVars);
-  });
 
 
 // organizer deletes the page 
@@ -241,12 +171,6 @@ app.get("/events/:id/delete", (req, res) => {
   res.redirect("/");
 })   
 
-//generate random strings(11 digits) for URLs
-function generateRandomString() {
-  return Math.random().toString(36).substring(2);
-}
-
-generateRandomString()
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);  
