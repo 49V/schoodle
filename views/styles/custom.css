@@ -4,7 +4,7 @@ body {
 }
 
 .navbar {
-  background-color: #000639;
+  background-color: #202e78;
   margin-bottom: 0;
   border-radius: 0;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 .container-fluid {
-  background-color: #F4F6F8;
+  background-color: #F9FAFB;
 }
 
 body {
@@ -49,8 +49,9 @@ div.createButton h3 {
 
 .col-md-8 {
   margin-top: 2em;
-  background-color: #000639;
+  background-color: #202e78;
   padding-bottom: 2em;
+  border-radius: 5px;
 }
 
 .col-md-8 h2 {
@@ -64,6 +65,7 @@ section.main {
   /* padding-top: 2em; */
   /* padding-bottom: 2em; */
   padding: 2em;
+  border-radius: 5px;
 }
 
 .form {

@@ -12,6 +12,7 @@ const app         = express();
 
 // const knexConfig  = require("./knexfile");             //uncomment 
 // const knex        = require("knex")(knexConfig[ENV]);  //uncomment
+const moment = require('moment');
 const morgan      = require('morgan');
 // const knexLogger  = require('knex-logger');            //uncomment
 // const pg          = require('pg');                     //uncomment
@@ -38,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // }));
 app.use(express.static("public"));
 app.use(express.static("views"));
-
+app.use(express.static("node_modules"));
 // Mount all resource routes
 // app.use("/events", usersRoutes(knex));                 //uncomment
 
@@ -89,7 +90,6 @@ app.use(cookieSession({
     //  }
     }
 
-
   // Home page
   app.get("/", (req, res) => {
     res.render("index.ejs");
@@ -101,7 +101,7 @@ app.use(cookieSession({
   });
 
 //  Receive form info for event creation and render events2.ejs
-  app.post("/eventInfo", (req, res) => {
+  app.post("/events", (req, res) => {
     const randomUrl = generateRandomString();
     const eventName = req.body.eventName;
     const eventLocation = req.body.eventLocation;

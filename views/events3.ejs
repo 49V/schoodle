@@ -9,19 +9,9 @@
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="styles/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <script src="dist/clipboard.min.js"></script>
-    <script>
-        var btn = document.getElementById('btn');
-        var clipboard = new ClipboardJS(btn, {
-            container: document.getElementById('modal')
-        });
-        clipboard.on('success', function (e) {
-            console.log(e);
-        });
-        clipboard.on('error', function (e) {
-            console.log(e);
-        });
-    </script>
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+    <script src="/clipboard/dist/clipboard.min.js"></script>    
+    
     <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
     <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
@@ -45,12 +35,14 @@
 
                     <div class="eventLink">
                         <!-- Target -->
-                        <input id="eventLink" value="http://www.schoodle.com/<%= eventLink %>">
-                        <!-- Trigger -->
-                        <button class="eventBtn" data-clipboard-target="#eventLink">
-                            <img src="/images/Octicons-clippy.svg" width=14
-                                height=16 alt="Copy to clipboard">
-                        </button>
+                            <input id="eventLink" value="http://www.schoodle.com/<%= eventLink %>" size="50">
+                            <!-- Trigger -->
+                            <button class="eventBtn" data-clipboard-target="#eventLink"
+                            id="beans">
+                                <img src="/images/Octicons-clippy.svg" width=14
+                                    height=16 alt="Copy to clipboard">
+                            </button>
+                        
                     </div>
                     <div class="createButton">
                         <a href="/eventPageFinal" class="btn">
@@ -67,6 +59,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
+        <script>
+            var clipboard = new ClipboardJS('#beans');
+            console.log("CLIPBOARD: ", clipboard);
+            clipboard.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+        </script>
 </body>
 
 </html>
