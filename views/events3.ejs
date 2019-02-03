@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Schoodle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+    <script src="/clipboard/dist/clipboard.min.js"></script>    
+    
+    <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
+    <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
+    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar">
+                <h1>Schoodle!</h1>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2>Step 4 of 4</h2>
+                <h2>Let's get to the voting!</h2>
+                <section class="main">
+                    <div class="message">
+                        Congratulations! Your event page is now ready to be sent out to all of your attendees.
+                    </div>
+
+                    <div class="eventLink">
+                        <!-- Target -->
+                            <input id="eventLink" value="http://localhost:8080/events/<%= eventLink %>" size="50">
+                            <!-- Trigger -->
+                            <button class="eventBtn" data-clipboard-target="#eventLink"
+                            id="beans">
+                                <img src="/images/Octicons-clippy.svg" width=14
+                                    height=16 alt="Copy to clipboard">
+                            </button>
+                        
+                    </div>
+                    <div class="createButton">
+                        <a href="/eventPageFinal" class="btn">
+                            <h3>Continue -> </h3></a>
+                        </a></div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+        <script>
+            var clipboard = new ClipboardJS('#beans');
+            console.log("CLIPBOARD: ", clipboard);
+            clipboard.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+        </script>
+</body>
+
+</html>
