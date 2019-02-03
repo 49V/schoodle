@@ -1,7 +1,99 @@
-body {
-  background-color: #EEE;
+//colors
+$color_astronaut_approx: #202e78;
+$color_ice_cold_approx: #b7ecec;
+$color_alabaster_approx: #f9fafb;
+$color_perano_approx: #b3bcf5;
+$color_gun_powder_approx: #3e4155;
+$color_whisper_approx: #f4f5fa;
+$color_japanese_laurel_approx: green;
+$red: red;
 
-  h1 {
-    color: #244751;
-  }
+//fonts
+$font_0: Roboto;
+$font_1: sans-serif;
+
+body {
+	font-family: $font_0, $font_1;
+	background-color: $color_alabaster_approx;
+}
+.navbar {
+	background-color: $color_astronaut_approx;
+	margin-bottom: 0;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+	h1 {
+		font-size: 5em;
+		color: $color_ice_cold_approx;
+		text-align: right;
+		padding-right: 25px;
+	}
+}
+.jumbotron {
+	background-color: $color_alabaster_approx;
+	margin-top: 5em;
+}
+.container-fluid {
+	background-color: $color_alabaster_approx;
+}
+.btn {
+	background-color: $color_perano_approx;
+	color: $color_gun_powder_approx;
+	margin-top: 3em;
+	&:hover {
+		color: $color_astronaut_approx;
+	}
+}
+.col-md-8 {
+	margin-top: 2em;
+	background-color: $color_astronaut_approx;
+	padding-bottom: 2em;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 5px;
+	h2 {
+		color: $color_ice_cold_approx;
+		text-align: center;
+	}
+}
+.form {
+	margin: 1em 3em;
+	padding-top: 2em;
+	padding-bottom: 2em;
+}
+.message {
+	text-align: center;
+	font-size: 1.5em;
+}
+.table {
+	text-align: center;
+}
+.eventLink {
+	text-align: center;
+	margin-top: 1em;
+}
+.eventTable {
+	width: 100%;
+}
+.eventFinalPicker {
+	width: 100%;
+}
+h2 {
+	&.posResponse {
+		color: $color_japanese_laurel_approx;
+	}
+	&.negResponse {
+		color: $red;
+	}
+}
+div.createButton {
+	text-align: center;
+	h3 {
+		margin-top: 10px;
+	}
+}
+section.main {
+	background-color: $color_whisper_approx;
+	margin-top: 1em;
+	padding: 2em;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 5px;
 }
