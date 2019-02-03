@@ -1,19 +1,19 @@
 "use strict";
 
-// require('dotenv').config();                            //uncomment
+require('dotenv').config();                            
 
-const PORT        = process.env.PORT || 8000;
+const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
 
-// const knexConfig  = require("./knexfile");             //uncomment 
-// const knex        = require("knex")(knexConfig[ENV]);  //uncomment
+const knexConfig  = require("./knexfile");             
+const knex        = require("knex")(knexConfig[ENV]);  
 const moment = require('moment');
 const morgan      = require('morgan');
-// const knexLogger  = require('knex-logger');            //uncomment
+const knexLogger  = require('knex-logger');            
 
 // Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -21,9 +21,7 @@ const usersRoutes = require("./routes/users");
 // The `dataHelpers` module provides an interface to the database of schoodle
 const dataHelpers = require("./lib/db")(knex);
 
-
 // Seperated Routes for each Resource
-// const usersRoutes   = require("./routes/users");       //uncomment
 const cookieSession = require("cookie-session");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -31,7 +29,7 @@ const cookieSession = require("cookie-session");
 app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
-// app.use(knexLogger(knex));                             //uncomment
+app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,7 +48,7 @@ app.use(express.static("node_modules"));
 //use cookies
 app.use(cookieSession({
   name: 'session',
-  key: ['demo'],
+  keys: ['demo'],
   maxAge: 24 * 60 * 60 * 1000
 }))
 
