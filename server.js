@@ -89,6 +89,7 @@ app.post("/eventOptions", (req, res) => {
     eventLink: eventDB[1].randomUrl,
     attendeesName: "abc"
   }
+  console.log(optionOnet);
   res.render("events3.ejs", templateVars);
 });
 
@@ -179,6 +180,8 @@ app.get("/events/:id/delete", (req, res) => {
 function generateRandomString() {
   return Math.random().toString(36).substring(2);
 }
+
+
 
 generateRandomString()
 
