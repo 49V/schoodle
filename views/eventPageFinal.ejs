@@ -49,39 +49,51 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">Choose final option:</th>
-                <td>
-                    <form action="/vote" method="POST">
-                        <div class="form-check">
+                <tr>
+                    <th scope="row">Choose final option:</th>
+                    <td>
+                        <form action="/vote" method="POST">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="option1" name="optionOne">
-                                <label class="form-check-label" for="option1"><%= optionOnesum %>
+                                <label class="form-check-label" for="option1">
                                 </label>
-                              </div>
-                            </td>
-                            <td><div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="option2" name="optionTwo">
-                                <label class="form-check-label" for="option2"> <%= optionTwosum %>
-                                </label>
-                              </div></td>
-                          </tr>
-                          <% attendees.forEach((attendee => %>
-                            <tr>
-                                <th scope="row"><%= attendeesName %></th>
-                                <% dates.forEach((date => %> 
-                                <td><% if (responses.dates[0] = 1) { %>
-                                    <h2 class="posResponse">✔</h2>
-                                <% } else if (responses.dates[0] = 0) { %>
-                                    <h2 class="negResponse">✘</h2>
-                                <% } %>
-                                </td>
-                                <% )); %>
-                            </tr>
-                          <% )); %>
-                        </tbody>
-                      </table>
-                      <div class="createButton"><button type="submit" class="btn"><h3>Vote!</h3></button>
+                            </div>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="option2" name="optionTwo">
+                            <label class="form-check-label" for="option2"> 
+                            </label>
                         </div>
+                    </td>
+                </tr>
+                     <% attendees.forEach((attendee) => { %>
+                        <tr>
+                            <th scope="row"><%= attendee.attendee_name %></th>
+                            <td><% if (attendee.responses_dates) { %>
+                                <% if (attendee.responses_dates[0] === 1) { %>
+                                    <h2 class="posResponse">✔</h2>
+                                    <% } else if (attendee.responses_dates &&attendee.responses_dates[0] === 0) { %>
+                                    <h2 class="negResponse">✘</h2>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if (attendee.responses_dates &&attendee.responses_dates[1] === 1) { %>
+                                    <h2 class="posResponse">✔</h2>
+                                    <% } else if (attendee.responses_dates &&attendee.responses_dates[1] === 0) { %>
+                                    <h2 class="negResponse">✘</h2>
+                                    <% } %>
+                                </td>
+                          <%  } %>
+
+                            </tr>    
+                            <% }) %> 
+                               
+            </tbody>
+        </table>
+        <div class="createButton">
+            <button type="submit" class="btn"><h3>Vote!</h3></button>
+        </div>
                     </form>
                   
         </section>

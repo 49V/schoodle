@@ -134,40 +134,48 @@ app.get("/eventPageFinal", (req, res) => {
   // Else if cookie !== eventID
   // res.render(eventPageAttendees.ejs)
   const cookie = req.cookies.event_id;
-
-  const eventID = "d54bea823ad78d1f9ef8667c"
-
+console.log(cookie);
   if (cookie) {
  
-    const templateVars = {
+    dataHelpers.getEventPageData(cookie)
+        .then((rows) => {
+            const templateVars = { 
+                eventTitle: rows[0].name,
+                eventDescription: rows[0].description,
+                eventLocation: rows[0].location,
+                optionOne: rows[0].options_dates[0],
+                optionTwo: rows[0].options_dates[1],
+                attendees: rows, //rows[0].attendee_name, rows[0].responses_dates[0],[1]  
+              }
+            return res.render('eventPageFinal.ejs', templateVars);
+            console.log(rows);
+        })
 
-    };
-    res.render('eventPageFinal.ejs', templateVars);
+    
   } else {
-    const templateVars = {
+    // const templateVars = {
 
-    };
+    // };
     res.render('eventPageAttendees.ejs', templateVars);
   }
 
-  const templateVars = { 
-    eventTitle: eventDB[1].eventTitle,
-    eventDescription: eventDB[1].eventDescription,
-    eventLocation: eventDB[1].eventLocation,
-    optionOne: options[1].optionOne,
-    optionTwo: options[1].optionTwo,
-    attendeesName: "Jim",  
-    attendeeOneresponseOne: "yes",
-    attendeeOneresponseTwo: "no",
-    attendeeTwo: "Karen",
-    attendeeTworesponseOne: "yes",
-    attendeeTworesponseTwo: "yes",
-    optionOnesum: "3",
-    optionTwosum: "5"
-    // attendeeSum: "2";
-  };
-  console.log(templateVars);
-  res.render("eventPageFinal.ejs", templateVars);
+//   const templateVars = { 
+//     eventTitle: eventDB[1].eventTitle,
+//     eventDescription: eventDB[1].eventDescription,
+//     eventLocation: eventDB[1].eventLocation,
+//     optionOne: options[1].optionOne,
+//     optionTwo: options[1].optionTwo,
+//     attendeesName: "Jim",  
+//     attendeeOneresponseOne: "yes",
+//     attendeeOneresponseTwo: "no",
+//     attendeeTwo: "Karen",
+//     attendeeTworesponseOne: "yes",
+//     attendeeTworesponseTwo: "yes",
+//     optionOnesum: "3",
+//     optionTwosum: "5"
+//     // attendeeSum: "2";
+//   };
+//   console.log(templateVars);
 });
 
 // 
