@@ -57,11 +57,12 @@
               </tr>
               <tr>
                 <th scope="row">    
-                        <div class="form-group mb-2">   
-                                <form action="/responses/:id/edit" method="POST"> 
-                                <input type="text" class="form-control-plaintext" id="attendeeName" placeholder="Enter your name">
+                        <div class="form-group mb-2">
+                                <form action="/events/<%=randomUrl%>" method="POST">
+                                <input type="text" class="form-control-plaintext" id="attendeeName" value="Enter your name" name="attendeesName">
                                 <small id="passwordHelpBlock" class="form-text text-muted"><a href="/delete">Delete</a></small>
-                              </div>
+                                
+                            </div>
                                 </th>
                                 <td>
                                       <div class="form-check">
@@ -83,7 +84,8 @@
             </tbody>
           </table>
           <div class="createButton">
-            <button type="submit" class="btn"><h3>Vote!</h3></button></form> 
+            <button type="submit" class="btn"><h3>Vote!</h3></button>
+            </form> 
         </div>
         </section>
       </div>
