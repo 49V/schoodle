@@ -77,11 +77,26 @@ app.get("/events", (req, res) => {
 // create a new event 
 // **need to set up cookies
 app.post("/eventInfo", (req, res) => { 
-  const randomUrl = generateRandomString();
-  const {eventName, eventLocation, eventDescription, organizerName, organizerEmail} = req.body;
-  eventDB[1] = {eventName, eventLocation, eventDescription, organizerName, organizerEmail, randomUrl};
-  console.log(eventDB[1]);  
-  res.render("events2.ejs");
+
+  const event = {
+    name: req.body.eventName, 
+    location: req.body.eventLocation,
+    description: req.body.eventDescription
+  };
+
+  const organizer = {
+    email: req.body.organizerEmail,
+    name: req.body.organizerName
+  };
+
+  dataHelpers.createOrganizerThenEvent(event, organizer)
+  .then((success) => {
+    if(success) {
+      res.render("events2.ejs");
+    } else {
+      console.log("ERROR");
+    }
+  });
 });
 
 
