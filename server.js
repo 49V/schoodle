@@ -115,7 +115,7 @@ app.post("/eventOptions", (req, res) => {
     if (success) {
       const templateVars = {            
         eventLink: req.cookies.event_id
-      }
+      };
       res.render("events3.ejs", templateVars);
     } else {
       console.log("ERROR");
@@ -126,6 +126,30 @@ app.post("/eventOptions", (req, res) => {
 //   This will be temporary and instead get rolled in to the following /events/:id with parameters for which cookie the person has. 
 //   final results
 app.get("/eventPageFinal", (req, res) => {
+
+  // If no cookie
+  // res.render('eventPageAttendees.ejs')
+  // Else if cookie === eventID
+  // res.render(eventPageFinal.ejs)
+  // Else if cookie !== eventID
+  // res.render(eventPageAttendees.ejs)
+  const cookie = req.cookies.event_id;
+
+  const eventID = "d54bea823ad78d1f9ef8667c"
+
+  if (cookie) {
+ 
+    const templateVars = {
+
+    };
+    res.render('eventPageFinal.ejs', templateVars);
+  } else {
+    const templateVars = {
+
+    };
+    res.render('eventPageAttendees.ejs', templateVars);
+  }
+
   const templateVars = { 
     eventTitle: eventDB[1].eventTitle,
     eventDescription: eventDB[1].eventDescription,
