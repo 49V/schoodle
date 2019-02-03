@@ -6,6 +6,7 @@ const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
+var cookieParser = require('cookie-parser');
 const sass        = require("node-sass-middleware");
 const app         = express();
 
@@ -46,11 +47,13 @@ app.use(express.static("node_modules"));
 // app.use("/events", usersRoutes(knex));                 //uncomment
 
 //use cookies
-app.use(cookieSession({
-  name: 'session',
-  keys: ['demo'],
-  maxAge: 24 * 60 * 60 * 1000
-}))
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: [],
+//   maxAge: 24 * 60 * 60 * 1000
+// }))
+
+app.use(cookieParser());
 
 // //eventDB object structure
 const eventDB = {
@@ -90,8 +93,9 @@ app.post("/eventInfo", (req, res) => {
   };
 
   dataHelpers.createOrganizerThenEvent(event, organizer)
-  .then((success) => {
-    if(success) {
+  .then((eventID) => {
+    if(eventID) {
+      res.cookie('event_id' , eventID[0]);
       res.render("events2.ejs");
     } else {
       console.log("ERROR");
