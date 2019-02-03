@@ -168,15 +168,31 @@ app.post("/events/:id", (req, res) => {
 
    const attendeeVote1 = (req.body.attendeeVote1) ? req.body.attendeeVote1 : 0;
    const attendeeVote2 = (req.body.attendeeVote2) ? req.body.attendeeVote2 : 0;
-   const response = {
+   let response = {
        attendee_name: req.body.attendeeName,
        attendee_email: req.body.attendeeEmail,
        dates: [attendeeVote1, attendeeVote2],
        events_id: req.params.id
    }
-   dataHelpers.createResponse(response)
 
-    return res.redirect(`/events/${req.params.id}`);
+   const cookie = req.cookies.attendeeCookie;
+
+   if (cookie === response.attendee_email) {
+       console.log("BLEEP");
+       response.attendee_email = cookie;
+       dataHelpers.updateResponse(response)
+       .then((success) => {
+            return res.redirect(`/events/${req.params.id}`);
+       });
+
+   } else {
+    dataHelpers.createResponse(response)
+    .then((success) => {
+        res.cookie('attendeeCookie' , req.body.attendeeEmail, {encode: String});
+        return res.redirect(`/events/${req.params.id}`);
+    })
+    }
+
 });
 
 
