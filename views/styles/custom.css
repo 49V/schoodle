@@ -98,3 +98,11 @@ section.main {
 .eventFinalPicker {
   width: 100%;
 }
+
+h2.posResponse {
+    color: green;
+}
+
+h2.negResponse {
+    color: red;
+}
