@@ -103,17 +103,24 @@ app.post("/eventInfo", (req, res) => {
   });
 });
 
-
 // add event time options
 app.post("/eventOptions", (req, res) => {
-  const {optionOne, optionTwo} = req.body;
-  options[1] = {optionOne, optionTwo}; 
-  const templateVars = {            
-    eventLink: eventDB[1].randomUrl,
-    attendeesName: "abc"
-  }
-  console.log(options[1]);
-  res.render("events3.ejs", templateVars);
+  const options = {
+    dates: [req.body.optionOne, req.body.optionTwo],
+    events_id: req.cookies.event_id
+  };
+  
+  dataHelpers.createOption(options)
+  .then((success) => {
+    if (success) {
+      const templateVars = {            
+        eventLink: req.cookies.event_id
+      }
+      res.render("events3.ejs", templateVars);
+    } else {
+      console.log("ERROR");
+    }
+  });
 });
 
 //   This will be temporary and instead get rolled in to the following /events/:id with parameters for which cookie the person has. 
