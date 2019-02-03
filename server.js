@@ -77,6 +77,7 @@ app.post("/eventInfo", (req, res) => {
   const randomUrl = generateRandomString();
   const {eventName, eventLocation, eventDescription, organizerName, organizerEmail} = req.body;
   eventDB[1] = {eventName, eventLocation, eventDescription, organizerName, organizerEmail, randomUrl};
+  console.log(eventDB[1]);  
   res.render("events2.ejs");
 });
 
@@ -89,7 +90,7 @@ app.post("/eventOptions", (req, res) => {
     eventLink: eventDB[1].randomUrl,
     attendeesName: "abc"
   }
-  console.log(optionOnet);
+  console.log(options[1]);
   res.render("events3.ejs", templateVars);
 });
 
@@ -112,6 +113,7 @@ app.get("/eventPageFinal", (req, res) => {
     optionTwosum: "5"
     // attendeeSum: "2";
   };
+  console.log(templateVars);
   res.render("eventPageFinal.ejs", templateVars);
 });
 
@@ -148,6 +150,7 @@ app.get("/events/:id/", (req, res) => {
     attendeeTworesponseOne: "yes",
     attendeeTworesponseTwo: "yes"
   }
+  console.log(tempVars);
   res.render('eventPageAttendee', tempVars) 
 });
 
@@ -167,6 +170,7 @@ app.post("/events/:id", (req, res) => { //changed from vote as it's associated w
     //attendeeOneresponseTwo: attendeesDB[1].attendeeResponseTwo //"no",
     // attendeeSum: "2";
     };
+    console.log(templateVars);
   res.render("eventPageFinal.ejs", templateVars);
   });
 
