@@ -65,13 +65,19 @@
                                 </label>
                               </div></td>
                           </tr>
-              
-                          <tr>
-                            <th scope="row"><%= attendeesName %></th>
-                            <td><%=  %></td>
-                            <td><%=  %></td>
-                          </tr>
-    
+                          <% attendees.forEach((attendee => %>
+                            <tr>
+                                <th scope="row"><%= attendeesName %></th>
+                                <% dates.forEach((date => %> 
+                                <td><% if (responses.dates[0] = 1) { %>
+                                    <h2 class="posResponse">✔</h2>
+                                <% } else if (responses.dates[0] = 0) { %>
+                                    <h2 class="negResponse">✘</h2>
+                                <% } %>
+                                </td>
+                                <% )); %>
+                            </tr>
+                          <% )); %>
                         </tbody>
                       </table>
                       <div class="createButton"><button type="submit" class="btn"><h3>Vote!</h3></button>
