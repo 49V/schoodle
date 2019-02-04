@@ -178,7 +178,6 @@ app.post("/events/:id", (req, res) => {
    const cookie = req.cookies.attendeeCookie;
 
    if (cookie === response.attendee_email) {
-       console.log("BLEEP");
        response.attendee_email = cookie;
        dataHelpers.updateResponse(response)
        .then((success) => {

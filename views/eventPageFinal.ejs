@@ -9,10 +9,6 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="../styles/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" /> -->
-
-  <!-- <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
-  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
 </head>
 
 <body>
@@ -46,24 +42,6 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">Choose final option:</th>
-                    <td>
-                        <form action="/vote" method="POST">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="option1" name="optionOne">
-                                <label class="form-check-label" for="option1">
-                                </label>
-                            </div>
-                    </td>
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="option2" name="optionTwo">
-                            <label class="form-check-label" for="option2"> 
-                            </label>
-                        </div>
-                    </td>
-                </tr>
                      <% attendees.forEach((attendee) => { %>
                         <tr>
                             <th scope="row"><%= attendee.attendee_name %></th>
