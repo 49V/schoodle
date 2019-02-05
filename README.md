@@ -1,7 +1,7 @@
 # Schoodle
-Schoodle is a web application allowing users to arrange an event and have their chosen attendees vote on which date/time works for them. It is based on ![Doodle.com](http://www.doodle.com) 
+Schoodle is a web application allowing users to arrange an event and have their chosen attendees vote on which date/time works for them. It is based on [Doodle.com](http://www.doodle.com) 
 
-Schoodle was created as a midterm group project during the Lighthouse Labs web development bootcamp by ![Moshe Lawlor](https://github.com/49V), ![Erin Toth](https://github.com/erinltoth), and ![Christina Hsu](https://github.com/ChristinaHsu88). 
+Schoodle was created as a midterm group project during the Lighthouse Labs web development bootcamp by [Moshe Lawlor](https://github.com/49V), [Erin Toth](https://github.com/erinltoth), and [Christina Hsu](https://github.com/ChristinaHsu88). 
 
 ## Dependencies 
  - Node 5.10.x or above
